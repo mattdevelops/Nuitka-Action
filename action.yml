@@ -8,7 +8,7 @@ description: "Build a stand-alone exe from python scripts using nuitka on Mac/Li
 
 inputs:
   nuitka-version:
-    default: "1.3.8"
+    default: "1.4.8"
     description: "Version of nuitka to use"
 
   ### Only Required Input ###
@@ -126,7 +126,7 @@ runs:
         $github_action_path = $github_action_path -replace "/", "\"
         pip install nuitka==${{inputs.nuitka-version }} -r "$github_action_path\requirements.txt"
         if ("${{ inputs.access-token }}" -ne ""){
-          pip install -e git+https://${{ inputs.access-token }}@github.com/Nuitka/Nuitka-commercial.git@nuitka-main-2022-12-14#egg=nuitka
+          pip install -e git+https://${{ inputs.access-token }}@github.com/Nuitka/Nuitka-commercial.git@nuitka-main-2023-02-27#egg=nuitka
         }
 
     - name: Install Dependencies (macOS and Linux)
@@ -135,7 +135,7 @@ runs:
       run: |
         pip install nuitka==${{inputs.nuitka-version }} -r "${{ github.action_path }}/requirements.txt"
         if [ "${{ inputs.access-token }}" != "" ]; then
-          pip install -e git+https://${{ inputs.access-token }}@github.com/Nuitka/Nuitka-commercial.git@nuitka-main-2022-12-14#egg=nuitka
+          pip install -e git+https://${{ inputs.access-token }}@github.com/Nuitka/Nuitka-commercial.git@nuitka-main-2023-02-27#egg=nuitka
         fi
 
     - name: Build Executable (Windows)
