@@ -181,7 +181,7 @@ runs:
           $args += @('--windows-product-name="${{ inputs.windows-product-name }}"')
         }
         if ("${{ inputs.windows-product-version }}" -ne ''){
-          $args += @('--windows-product-version=${{ inputs.windows-product-name }}')
+          $args += @('--windows-product-version=${{ inputs.windows-product-version }}')
         }
         if ("${{ inputs.mingw64 }}" -eq '${{ true }}'){
           $args += @('--mingw64')
