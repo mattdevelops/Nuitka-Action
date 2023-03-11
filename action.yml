@@ -34,9 +34,23 @@ inputs:
     default: true
     description: 'Allow Nuitka to download external code if necessary, e.g. dependency walker, ccache, and even gcc on Windows. To disable, redirect input from nul device, e.g. "</dev/null" or "<NUL:". Default is to prompt.'
   show-scons:
-    description: "Dispays the detailed scons info during build process (useful for debugging purposes)"
+    description: "Displays the detailed scons info during build process (useful for debugging purposes)"
     type: boolean
     default: true
+    
+  ### Python Flags ###
+  no-docstrings:
+    description: ""
+    type: boolean
+    default: false
+  no-asserts:
+    description: ""
+    type: boolean
+    default: false
+  no-annotations:
+    description: ""
+    type: boolean
+    default: false
 
   ### Plugins to enable. ###
   enable-plugins:
@@ -177,11 +191,27 @@ runs:
         if ("${{ inputs.windows-icon-from-ico }}" -ne ''){
           $args += @('--windows-icon-from-ico="${{ inputs.windows-icon-from-ico }}"')
         }
-        if ("${{ inputs.windows-product-name }}" -ne ''){
+        if ("${{ inputs.windows-product-name }}" -ne '' -and ${{ inputs.windows-product-version }}" -ne ''){
           $args += @('--windows-product-name="${{ inputs.windows-product-name }}"')
-        }
-        if ("${{ inputs.windows-product-version }}" -ne ''){
           $args += @('--windows-product-version=${{ inputs.windows-product-version }}')
+        }
+        if ("${{ inputs.windows-file-version }}" -ne ''){
+          $args += @('--windows-file-version="${{ inputs.windows-file-version }}"')
+        }
+        if ("${{ inputs.windows-file-description }}" -ne ''){
+          $args += @('--windows-file-description="${{ inputs.windows-file-description }}"')
+        }
+        if ("${{ inputs.windows-company-name }}" -ne ''){
+          $args += @('--windows-company-name="${{ inputs.windows-company-name }}"')
+        }
+        if ("${{ inputs.no-docstrings }}" -eq '${{ true }}'){
+          $args += @('--python-flag=no_docstrings')
+        }
+        if ("${{ inputs.no-asserts }}" -eq '${{ true }}'){
+          $args += @('--python-flag=no_asserts')
+        }
+        if ("${{ inputs.no-annotations }}" -eq '${{ true }}'){
+          $args += @('--python-flag=no_annotations')
         }
         if ("${{ inputs.mingw64 }}" -eq '${{ true }}'){
           $args += @('--mingw64')
