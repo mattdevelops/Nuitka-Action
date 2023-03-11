@@ -192,7 +192,7 @@ runs:
           $args += @('--windows-icon-from-ico="${{ inputs.windows-icon-from-ico }}"')
         }
         if ("${{ inputs.windows-product-name }}" -ne '' -and ${{ inputs.windows-product-version }}" -ne ''){
-          $args += @('--windows-product-name="${{ inputs.windows-product-name }}"')
+          $args += @('--windows-product-name="${{ inputs.windows-product-name }}"');
           $args += @('--windows-product-version=${{ inputs.windows-product-version }}')
         }
         if ("${{ inputs.windows-file-version }}" -ne ''){
